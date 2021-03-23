@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\Notification\Http\Controllers\Api\Notification\NotificationController;
+
+Route::group([
+    'prefix' => 'notification',
+    'as' => 'notification.',
+], function () {
+
+    Route::get('/', [NotificationController::class, 'index'])->name('index');
+    Route::post('/', [NotificationController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [NotificationController::class, 'show'])->name('show');
+        Route::put('/', [NotificationController::class, 'update'])->name('update');
+        Route::delete('/', [NotificationController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\ModelHaRole\Http\Controllers\Api\Modelharole\ModelharoleController;
 
 Route::group([
