@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\LocationLog\Http\Controllers\Api\Locationlog\LocationlogController;
+
+Route::group([
+    'prefix' => 'locationlog',
+    'as' => 'locationlog.',
+], function () {
+
+    Route::get('/', [LocationlogController::class, 'index'])->name('index');
+    Route::post('/', [LocationlogController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [LocationlogController::class, 'show'])->name('show');
+        Route::put('/', [LocationlogController::class, 'update'])->name('update');
+        Route::delete('/', [LocationlogController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\FlatOrder\Http\Controllers\Api\Flatorder\FlatorderController;
 
 Route::group([
