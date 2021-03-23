@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\Customer\Http\Controllers\Api\Customer\CustomerController;
+
+Route::group([
+    'prefix' => 'customer',
+    'as' => 'customer.',
+], function () {
+
+    Route::get('/', [CustomerController::class, 'index'])->name('index');
+    Route::post('/', [CustomerController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [CustomerController::class, 'show'])->name('show');
+        Route::put('/', [CustomerController::class, 'update'])->name('update');
+        Route::delete('/', [CustomerController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\CustomerPrice\Http\Controllers\Api\Customerprice\CustomerpriceController;
 
 Route::group([
