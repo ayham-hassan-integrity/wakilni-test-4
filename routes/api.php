@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\DriverStock\Http\Controllers\Api\Driverstock\DriverstockController;
+
+Route::group([
+    'prefix' => 'driverstock',
+    'as' => 'driverstock.',
+], function () {
+
+    Route::get('/', [DriverstockController::class, 'index'])->name('index');
+    Route::post('/', [DriverstockController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [DriverstockController::class, 'show'])->name('show');
+        Route::put('/', [DriverstockController::class, 'update'])->name('update');
+        Route::delete('/', [DriverstockController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\Driver\Http\Controllers\Api\Driver\DriverController;
 
 Route::group([
