@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\Setting\Http\Controllers\Api\Setting\SettingController;
+
+Route::group([
+    'prefix' => 'setting',
+    'as' => 'setting.',
+], function () {
+
+    Route::get('/', [SettingController::class, 'index'])->name('index');
+    Route::post('/', [SettingController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [SettingController::class, 'show'])->name('show');
+        Route::put('/', [SettingController::class, 'update'])->name('update');
+        Route::delete('/', [SettingController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\Route\Http\Controllers\Api\Route\RouteController;
 
 Route::group([
