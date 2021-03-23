@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\AppToken\Http\Controllers\Api\Apptoken\ApptokenController;
+
+Route::group([
+    'prefix' => 'apptoken',
+    'as' => 'apptoken.',
+], function () {
+
+    Route::get('/', [ApptokenController::class, 'index'])->name('index');
+    Route::post('/', [ApptokenController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [ApptokenController::class, 'show'])->name('show');
+        Route::put('/', [ApptokenController::class, 'update'])->name('update');
+        Route::delete('/', [ApptokenController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\App\Http\Controllers\Api\App\AppController;
 
 Route::group([
