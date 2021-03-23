@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\Package\Http\Controllers\Api\Package\PackageController;
+
+Route::group([
+    'prefix' => 'package',
+    'as' => 'package.',
+], function () {
+
+    Route::get('/', [PackageController::class, 'index'])->name('index');
+    Route::post('/', [PackageController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [PackageController::class, 'show'])->name('show');
+        Route::put('/', [PackageController::class, 'update'])->name('update');
+        Route::delete('/', [PackageController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\Order\Http\Controllers\Api\Order\OrderController;
 
 Route::group([
