@@ -21,6 +21,15 @@
         <li class="c-sidebar-nav-item">
             <x-utils.link
                 class="c-sidebar-nav-link"
+                :href="route('admin.order.index')"
+                :active="activeClass(Route::is('admin.order.index'), 'c-active')"
+                icon="c-sidebar-nav-icon cil-speedometer"
+                :text="__('Order')" />
+        </li>
+
+        <li class="c-sidebar-nav-item">
+            <x-utils.link
+                class="c-sidebar-nav-link"
                 :href="route('admin.orderdetail.index')"
                 :active="activeClass(Route::is('admin.orderdetail.index'), 'c-active')"
                 icon="c-sidebar-nav-icon cil-speedometer"
