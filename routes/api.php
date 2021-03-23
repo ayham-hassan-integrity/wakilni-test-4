@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\Message\Http\Controllers\Api\Message\MessageController;
+
+Route::group([
+    'prefix' => 'message',
+    'as' => 'message.',
+], function () {
+
+    Route::get('/', [MessageController::class, 'index'])->name('index');
+    Route::post('/', [MessageController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [MessageController::class, 'show'])->name('show');
+        Route::put('/', [MessageController::class, 'update'])->name('update');
+        Route::delete('/', [MessageController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\Location\Http\Controllers\Api\Location\LocationController;
 
 Route::group([
