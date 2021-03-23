@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\Office\Http\Controllers\Api\Office\OfficeController;
+
+Route::group([
+    'prefix' => 'office',
+    'as' => 'office.',
+], function () {
+
+    Route::get('/', [OfficeController::class, 'index'])->name('index');
+    Route::post('/', [OfficeController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [OfficeController::class, 'show'])->name('show');
+        Route::put('/', [OfficeController::class, 'update'])->name('update');
+        Route::delete('/', [OfficeController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\ObjectType\Http\Controllers\Api\Objecttype\ObjecttypeController;
 
 Route::group([

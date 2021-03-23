@@ -1,0 +1,1 @@
+<x-utils.link class="c-subheader-nav-link" :href="route('admin.office.deleted')" :text="__('Deleted Articles')" />
