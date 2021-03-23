@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\Barcode\Http\Controllers\Api\Barcode\BarcodeController;
+
+Route::group([
+    'prefix' => 'barcode',
+    'as' => 'barcode.',
+], function () {
+
+    Route::get('/', [BarcodeController::class, 'index'])->name('index');
+    Route::post('/', [BarcodeController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [BarcodeController::class, 'show'])->name('show');
+        Route::put('/', [BarcodeController::class, 'update'])->name('update');
+        Route::delete('/', [BarcodeController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\Area\Http\Controllers\Api\Area\AreaController;
 
 Route::group([
