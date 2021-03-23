@@ -21,6 +21,15 @@
         <li class="c-sidebar-nav-item">
             <x-utils.link
                 class="c-sidebar-nav-link"
+                :href="route('admin.comment.index')"
+                :active="activeClass(Route::is('admin.comment.index'), 'c-active')"
+                icon="c-sidebar-nav-icon cil-speedometer"
+                :text="__('Comment')" />
+        </li>
+
+        <li class="c-sidebar-nav-item">
+            <x-utils.link
+                class="c-sidebar-nav-link"
                 :href="route('admin.collection.index')"
                 :active="activeClass(Route::is('admin.collection.index'), 'c-active')"
                 icon="c-sidebar-nav-icon cil-speedometer"

@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\Comment\Http\Controllers\Api\Comment\CommentController;
+
+Route::group([
+    'prefix' => 'comment',
+    'as' => 'comment.',
+], function () {
+
+    Route::get('/', [CommentController::class, 'index'])->name('index');
+    Route::post('/', [CommentController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [CommentController::class, 'show'])->name('show');
+        Route::put('/', [CommentController::class, 'update'])->name('update');
+        Route::delete('/', [CommentController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\Collection\Http\Controllers\Api\Collection\CollectionController;
 
 Route::group([
