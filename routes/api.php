@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\SettingStore\Http\Controllers\Api\Settingstore\SettingstoreController;
+
+Route::group([
+    'prefix' => 'settingstore',
+    'as' => 'settingstore.',
+], function () {
+
+    Route::get('/', [SettingstoreController::class, 'index'])->name('index');
+    Route::post('/', [SettingstoreController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [SettingstoreController::class, 'show'])->name('show');
+        Route::put('/', [SettingstoreController::class, 'update'])->name('update');
+        Route::delete('/', [SettingstoreController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\Setting\Http\Controllers\Api\Setting\SettingController;
 
 Route::group([
