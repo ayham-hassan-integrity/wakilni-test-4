@@ -21,6 +21,15 @@
         <li class="c-sidebar-nav-item">
             <x-utils.link
                 class="c-sidebar-nav-link"
+                :href="route('admin.timezone.index')"
+                :active="activeClass(Route::is('admin.timezone.index'), 'c-active')"
+                icon="c-sidebar-nav-icon cil-speedometer"
+                :text="__('Timezone')" />
+        </li>
+
+        <li class="c-sidebar-nav-item">
+            <x-utils.link
+                class="c-sidebar-nav-link"
                 :href="route('admin.timesheet.index')"
                 :active="activeClass(Route::is('admin.timesheet.index'), 'c-active')"
                 icon="c-sidebar-nav-icon cil-speedometer"

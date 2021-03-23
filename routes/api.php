@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\TimeZone\Http\Controllers\Api\Timezone\TimezoneController;
+
+Route::group([
+    'prefix' => 'timezone',
+    'as' => 'timezone.',
+], function () {
+
+    Route::get('/', [TimezoneController::class, 'index'])->name('index');
+    Route::post('/', [TimezoneController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [TimezoneController::class, 'show'])->name('show');
+        Route::put('/', [TimezoneController::class, 'update'])->name('update');
+        Route::delete('/', [TimezoneController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\TimeSheet\Http\Controllers\Api\Timesheet\TimesheetController;
 
 Route::group([
