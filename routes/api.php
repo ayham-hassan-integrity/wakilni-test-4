@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\Store\Http\Controllers\Api\Store\StoreController;
+
+Route::group([
+    'prefix' => 'store',
+    'as' => 'store.',
+], function () {
+
+    Route::get('/', [StoreController::class, 'index'])->name('index');
+    Route::post('/', [StoreController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [StoreController::class, 'show'])->name('show');
+        Route::put('/', [StoreController::class, 'update'])->name('update');
+        Route::delete('/', [StoreController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\Stock\Http\Controllers\Api\Stock\StockController;
 
 Route::group([
