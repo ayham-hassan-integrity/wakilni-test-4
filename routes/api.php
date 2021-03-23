@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\Zone\Http\Controllers\Api\Zone\ZoneController;
+
+Route::group([
+    'prefix' => 'zone',
+    'as' => 'zone.',
+], function () {
+
+    Route::get('/', [ZoneController::class, 'index'])->name('index');
+    Route::post('/', [ZoneController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [ZoneController::class, 'show'])->name('show');
+        Route::put('/', [ZoneController::class, 'update'])->name('update');
+        Route::delete('/', [ZoneController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\Vehicle\Http\Controllers\Api\Vehicle\VehicleController;
 
 Route::group([
