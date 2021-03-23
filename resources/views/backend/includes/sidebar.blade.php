@@ -21,6 +21,15 @@
         <li class="c-sidebar-nav-item">
             <x-utils.link
                 class="c-sidebar-nav-link"
+                :href="route('admin.modelharole.index')"
+                :active="activeClass(Route::is('admin.modelharole.index'), 'c-active')"
+                icon="c-sidebar-nav-icon cil-speedometer"
+                :text="__('Modelharole')" />
+        </li>
+
+        <li class="c-sidebar-nav-item">
+            <x-utils.link
+                class="c-sidebar-nav-link"
                 :href="route('admin.modelhapermission.index')"
                 :active="activeClass(Route::is('admin.modelhapermission.index'), 'c-active')"
                 icon="c-sidebar-nav-icon cil-speedometer"

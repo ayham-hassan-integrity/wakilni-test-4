@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\ModelHaRole\Http\Controllers\Api\Modelharole\ModelharoleController;
+
+Route::group([
+    'prefix' => 'modelharole',
+    'as' => 'modelharole.',
+], function () {
+
+    Route::get('/', [ModelharoleController::class, 'index'])->name('index');
+    Route::post('/', [ModelharoleController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [ModelharoleController::class, 'show'])->name('show');
+        Route::put('/', [ModelharoleController::class, 'update'])->name('update');
+        Route::delete('/', [ModelharoleController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\ModelHaPermission\Http\Controllers\Api\Modelhapermission\ModelhapermissionController;
 
 Route::group([
