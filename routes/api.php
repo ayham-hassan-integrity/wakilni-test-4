@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\Collection\Http\Controllers\Api\Collection\CollectionController;
+
+Route::group([
+    'prefix' => 'collection',
+    'as' => 'collection.',
+], function () {
+
+    Route::get('/', [CollectionController::class, 'index'])->name('index');
+    Route::post('/', [CollectionController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [CollectionController::class, 'show'])->name('show');
+        Route::put('/', [CollectionController::class, 'update'])->name('update');
+        Route::delete('/', [CollectionController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\Barcode\Http\Controllers\Api\Barcode\BarcodeController;
 
 Route::group([
