@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\Driver\Http\Controllers\Api\Driver\DriverController;
+
+Route::group([
+    'prefix' => 'driver',
+    'as' => 'driver.',
+], function () {
+
+    Route::get('/', [DriverController::class, 'index'])->name('index');
+    Route::post('/', [DriverController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [DriverController::class, 'show'])->name('show');
+        Route::put('/', [DriverController::class, 'update'])->name('update');
+        Route::delete('/', [DriverController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\DriverSubmission\Http\Controllers\Api\Driversubmission\DriversubmissionController;
 
 Route::group([
