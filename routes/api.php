@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\TelescopeEntry\Http\Controllers\Api\Telescopeentry\TelescopeentryController;
+
+Route::group([
+    'prefix' => 'telescopeentry',
+    'as' => 'telescopeentry.',
+], function () {
+
+    Route::get('/', [TelescopeentryController::class, 'index'])->name('index');
+    Route::post('/', [TelescopeentryController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [TelescopeentryController::class, 'show'])->name('show');
+        Route::put('/', [TelescopeentryController::class, 'update'])->name('update');
+        Route::delete('/', [TelescopeentryController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\Task\Http\Controllers\Api\Task\TaskController;
 
 Route::group([
