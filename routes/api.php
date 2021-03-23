@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\Vehicle\Http\Controllers\Api\Vehicle\VehicleController;
+
+Route::group([
+    'prefix' => 'vehicle',
+    'as' => 'vehicle.',
+], function () {
+
+    Route::get('/', [VehicleController::class, 'index'])->name('index');
+    Route::post('/', [VehicleController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [VehicleController::class, 'show'])->name('show');
+        Route::put('/', [VehicleController::class, 'update'])->name('update');
+        Route::delete('/', [VehicleController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\User\Http\Controllers\Api\User\UserController;
 
 Route::group([
