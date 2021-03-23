@@ -21,6 +21,15 @@
         <li class="c-sidebar-nav-item">
             <x-utils.link
                 class="c-sidebar-nav-link"
+                :href="route('admin.customeroperator.index')"
+                :active="activeClass(Route::is('admin.customeroperator.index'), 'c-active')"
+                icon="c-sidebar-nav-icon cil-speedometer"
+                :text="__('Customeroperator')" />
+        </li>
+
+        <li class="c-sidebar-nav-item">
+            <x-utils.link
+                class="c-sidebar-nav-link"
                 :href="route('admin.customercurrency.index')"
                 :active="activeClass(Route::is('admin.customercurrency.index'), 'c-active')"
                 icon="c-sidebar-nav-icon cil-speedometer"

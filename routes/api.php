@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\CustomerOperator\Http\Controllers\Api\Customeroperator\CustomeroperatorController;
+
+Route::group([
+    'prefix' => 'customeroperator',
+    'as' => 'customeroperator.',
+], function () {
+
+    Route::get('/', [CustomeroperatorController::class, 'index'])->name('index');
+    Route::post('/', [CustomeroperatorController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [CustomeroperatorController::class, 'show'])->name('show');
+        Route::put('/', [CustomeroperatorController::class, 'update'])->name('update');
+        Route::delete('/', [CustomeroperatorController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\CustomerCurrency\Http\Controllers\Api\Customercurrency\CustomercurrencyController;
 
 Route::group([
