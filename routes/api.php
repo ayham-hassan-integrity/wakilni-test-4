@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\TimeSheet\Http\Controllers\Api\Timesheet\TimesheetController;
+
+Route::group([
+    'prefix' => 'timesheet',
+    'as' => 'timesheet.',
+], function () {
+
+    Route::get('/', [TimesheetController::class, 'index'])->name('index');
+    Route::post('/', [TimesheetController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [TimesheetController::class, 'show'])->name('show');
+        Route::put('/', [TimesheetController::class, 'update'])->name('update');
+        Route::delete('/', [TimesheetController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\TelescopeMonitoring\Http\Controllers\Api\Telescopemonitoring\TelescopemonitoringController;
 
 Route::group([
