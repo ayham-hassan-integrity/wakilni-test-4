@@ -13,7 +13,6 @@ use App\Domains\Auth\Services\RoleService;
 /**
  * Class RoleController.
  */
- /** @OA\Info(title="wakilni-test-4 API", version="0.1") */
 class RoleController
 {
     /**
