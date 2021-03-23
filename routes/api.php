@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\Area\Http\Controllers\Api\Area\AreaController;
+
+Route::group([
+    'prefix' => 'area',
+    'as' => 'area.',
+], function () {
+
+    Route::get('/', [AreaController::class, 'index'])->name('index');
+    Route::post('/', [AreaController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [AreaController::class, 'show'])->name('show');
+        Route::put('/', [AreaController::class, 'update'])->name('update');
+        Route::delete('/', [AreaController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\AppToken\Http\Controllers\Api\Apptoken\ApptokenController;
 
 Route::group([
