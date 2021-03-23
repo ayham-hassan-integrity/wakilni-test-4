@@ -1,0 +1,124 @@
+<?php
+
+namespace App\Domains\Role\Services;
+
+use App\Domains\Role\Models\Role;
+use App\Exceptions\GeneralException;
+use App\Services\BaseService;
+use Exception;
+use Illuminate\Support\Facades\DB;
+
+/**
+ * Class RoleService.
+ */
+class RoleService extends BaseService
+{
+    /**
+     * RoleService constructor.
+     *
+     * @param Role $role
+     */
+    public function __construct(Role $role)
+    {
+        $this->model = $role;
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return Role
+     * @throws GeneralException
+     * @throws \Throwable
+     */
+    public function store(array $data = []): Role
+    {
+        DB::beginTransaction();
+
+        try {
+            $role = $this->model::create([
+                'name' => $data['name'],
+                'guard_name' => $data['guard_name'],
+            ]);
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            throw new GeneralException(__('There was a problem creating this role. Please try again.'));
+        }
+
+        DB::commit();
+
+        return $role;
+    }
+
+    /**
+     * @param Role $role
+     * @param array $data
+     *
+     * @return Role
+     * @throws \Throwable
+     */
+    public function update(Role $role, array $data = []): Role
+    {
+        DB::beginTransaction();
+
+        try {
+            $role->update([
+                'name' => $data['name'],
+                'guard_name' => $data['guard_name'],
+            ]);
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            throw new GeneralException(__('There was a problem updating this role. Please try again.'));
+        }
+
+        DB::commit();
+
+        return $role;
+    }
+
+    /**
+     * @param Role $role
+     *
+     * @return Role
+     * @throws GeneralException
+     */
+    public function delete(Role $role): Role
+    {
+        if ($this->deleteById($role->id)) {
+            return $role;
+        }
+
+        throw new GeneralException('There was a problem deleting this role. Please try again.');
+    }
+
+    /**
+     * @param Role $role
+     *
+     * @return Role
+     * @throws GeneralException
+     */
+    public function restore(Role $role): Role
+    {
+        if ($role->restore()) {
+            return $role;
+        }
+
+        throw new GeneralException(__('There was a problem restoring this  Roles. Please try again.'));
+    }
+
+    /**
+     * @param Role $role
+     *
+     * @return bool
+     * @throws GeneralException
+     */
+    public function destroy(Role $role): bool
+    {
+        if ($role->forceDelete()) {
+            return true;
+        }
+
+        throw new GeneralException(__('There was a problem permanently deleting this  Roles. Please try again.'));
+    }
+}
