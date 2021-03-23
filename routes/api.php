@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\Device\Http\Controllers\Api\Device\DeviceController;
+
+Route::group([
+    'prefix' => 'device',
+    'as' => 'device.',
+], function () {
+
+    Route::get('/', [DeviceController::class, 'index'])->name('index');
+    Route::post('/', [DeviceController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [DeviceController::class, 'show'])->name('show');
+        Route::put('/', [DeviceController::class, 'update'])->name('update');
+        Route::delete('/', [DeviceController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\CustomerOperator\Http\Controllers\Api\Customeroperator\CustomeroperatorController;
 
 Route::group([
