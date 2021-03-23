@@ -1,0 +1,76 @@
+<?php
+
+namespace App\Domains\Submission\Models;
+
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model;
+
+use App\Domains\Submission\Models\Traits\Attribute\SubmissionAttribute;
+use App\Domains\Submission\Models\Traits\Method\SubmissionMethod;
+use App\Domains\Submission\Models\Traits\Relationship\SubmissionRelationship;
+use App\Domains\Submission\Models\Traits\Scope\SubmissionScope;
+
+
+/**
+ * Class Submission.
+ */
+class Submission extends Model
+{
+    use SoftDeletes,
+        SubmissionAttribute,
+        SubmissionMethod,
+        SubmissionRelationship,
+        SubmissionScope;
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+    */
+    protected $table = 'submissions';
+
+    /**
+    * The attributes that are mass assignable.
+    *
+    * @var array
+    */
+    protected $fillable = [         "amount",        "corrected_amount",        "type_id",        "driver_submission_id",        "currency_id",    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+    ];
+
+
+    public $timestamps =["create_at","update_at"];
+
+    /**
+     * @var array
+     */
+    protected $dates = [
+    "deleted_at",
+    "create_at",
+    "update_at",
+    ];
+
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+
+    ];
+
+    /**
+     * @var array
+     */
+    protected $appends = [
+
+    ];
+
+}

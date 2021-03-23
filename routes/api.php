@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\Submission\Http\Controllers\Api\Submission\SubmissionController;
+
+Route::group([
+    'prefix' => 'submission',
+    'as' => 'submission.',
+], function () {
+
+    Route::get('/', [SubmissionController::class, 'index'])->name('index');
+    Route::post('/', [SubmissionController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [SubmissionController::class, 'show'])->name('show');
+        Route::put('/', [SubmissionController::class, 'update'])->name('update');
+        Route::delete('/', [SubmissionController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\StoreCurrency\Http\Controllers\Api\Storecurrency\StorecurrencyController;
 
 Route::group([
