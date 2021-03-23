@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\PasswordReset\Http\Controllers\Api\Passwordreset\PasswordresetController;
+
+Route::group([
+    'prefix' => 'passwordreset',
+    'as' => 'passwordreset.',
+], function () {
+
+    Route::get('/', [PasswordresetController::class, 'index'])->name('index');
+    Route::post('/', [PasswordresetController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [PasswordresetController::class, 'show'])->name('show');
+        Route::put('/', [PasswordresetController::class, 'update'])->name('update');
+        Route::delete('/', [PasswordresetController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\Package\Http\Controllers\Api\Package\PackageController;
 
 Route::group([
