@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\ModelHaPermission\Http\Controllers\Api\Modelhapermission\ModelhapermissionController;
+
+Route::group([
+    'prefix' => 'modelhapermission',
+    'as' => 'modelhapermission.',
+], function () {
+
+    Route::get('/', [ModelhapermissionController::class, 'index'])->name('index');
+    Route::post('/', [ModelhapermissionController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [ModelhapermissionController::class, 'show'])->name('show');
+        Route::put('/', [ModelhapermissionController::class, 'update'])->name('update');
+        Route::delete('/', [ModelhapermissionController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\Migration\Http\Controllers\Api\Migration\MigrationController;
 
 Route::group([
