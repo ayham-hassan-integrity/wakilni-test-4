@@ -1,0 +1,1 @@
+<x-utils.link class="c-subheader-nav-link" :href="route('admin.driverzone.deleted')" :text="__('Deleted Articles')" />

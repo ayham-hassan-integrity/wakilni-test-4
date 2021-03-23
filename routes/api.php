@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\DriverZone\Http\Controllers\Api\Driverzone\DriverzoneController;
+
+Route::group([
+    'prefix' => 'driverzone',
+    'as' => 'driverzone.',
+], function () {
+
+    Route::get('/', [DriverzoneController::class, 'index'])->name('index');
+    Route::post('/', [DriverzoneController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [DriverzoneController::class, 'show'])->name('show');
+        Route::put('/', [DriverzoneController::class, 'update'])->name('update');
+        Route::delete('/', [DriverzoneController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\DriverVehicle\Http\Controllers\Api\Drivervehicle\DrivervehicleController;
 
 Route::group([
