@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\Role\Http\Controllers\Api\Role\RoleController;
+
+Route::group([
+    'prefix' => 'role',
+    'as' => 'role.',
+], function () {
+
+    Route::get('/', [RoleController::class, 'index'])->name('index');
+    Route::post('/', [RoleController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [RoleController::class, 'show'])->name('show');
+        Route::put('/', [RoleController::class, 'update'])->name('update');
+        Route::delete('/', [RoleController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\RoleHaPermission\Http\Controllers\Api\Rolehapermission\RolehapermissionController;
 
 Route::group([
