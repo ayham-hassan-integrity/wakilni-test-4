@@ -21,6 +21,15 @@
         <li class="c-sidebar-nav-item">
             <x-utils.link
                 class="c-sidebar-nav-link"
+                :href="route('admin.driversubmission.index')"
+                :active="activeClass(Route::is('admin.driversubmission.index'), 'c-active')"
+                icon="c-sidebar-nav-icon cil-speedometer"
+                :text="__('Driversubmission')" />
+        </li>
+
+        <li class="c-sidebar-nav-item">
+            <x-utils.link
+                class="c-sidebar-nav-link"
                 :href="route('admin.device.index')"
                 :active="activeClass(Route::is('admin.device.index'), 'c-active')"
                 icon="c-sidebar-nav-icon cil-speedometer"
