@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\PiggyBank\Http\Controllers\Api\Piggybank\PiggybankController;
+
+Route::group([
+    'prefix' => 'piggybank',
+    'as' => 'piggybank.',
+], function () {
+
+    Route::get('/', [PiggybankController::class, 'index'])->name('index');
+    Route::post('/', [PiggybankController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [PiggybankController::class, 'show'])->name('show');
+        Route::put('/', [PiggybankController::class, 'update'])->name('update');
+        Route::delete('/', [PiggybankController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\Permission\Http\Controllers\Api\Permission\PermissionController;
 
 Route::group([

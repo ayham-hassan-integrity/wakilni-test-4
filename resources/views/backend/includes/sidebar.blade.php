@@ -21,6 +21,15 @@
         <li class="c-sidebar-nav-item">
             <x-utils.link
                 class="c-sidebar-nav-link"
+                :href="route('admin.piggybank.index')"
+                :active="activeClass(Route::is('admin.piggybank.index'), 'c-active')"
+                icon="c-sidebar-nav-icon cil-speedometer"
+                :text="__('Piggybank')" />
+        </li>
+
+        <li class="c-sidebar-nav-item">
+            <x-utils.link
+                class="c-sidebar-nav-link"
                 :href="route('admin.permission.index')"
                 :active="activeClass(Route::is('admin.permission.index'), 'c-active')"
                 icon="c-sidebar-nav-icon cil-speedometer"
