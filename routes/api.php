@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\CustomerCurrency\Http\Controllers\Api\Customercurrency\CustomercurrencyController;
+
+Route::group([
+    'prefix' => 'customercurrency',
+    'as' => 'customercurrency.',
+], function () {
+
+    Route::get('/', [CustomercurrencyController::class, 'index'])->name('index');
+    Route::post('/', [CustomercurrencyController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [CustomercurrencyController::class, 'show'])->name('show');
+        Route::put('/', [CustomercurrencyController::class, 'update'])->name('update');
+        Route::delete('/', [CustomercurrencyController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\Customer\Http\Controllers\Api\Customer\CustomerController;
 
 Route::group([
