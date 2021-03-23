@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\FailedJob\Http\Controllers\Api\Failedjob\FailedjobController;
+
+Route::group([
+    'prefix' => 'failedjob',
+    'as' => 'failedjob.',
+], function () {
+
+    Route::get('/', [FailedjobController::class, 'index'])->name('index');
+    Route::post('/', [FailedjobController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [FailedjobController::class, 'show'])->name('show');
+        Route::put('/', [FailedjobController::class, 'update'])->name('update');
+        Route::delete('/', [FailedjobController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\DriverZone\Http\Controllers\Api\Driverzone\DriverzoneController;
 
 Route::group([
