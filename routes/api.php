@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\Task\Http\Controllers\Api\Task\TaskController;
+
+Route::group([
+    'prefix' => 'task',
+    'as' => 'task.',
+], function () {
+
+    Route::get('/', [TaskController::class, 'index'])->name('index');
+    Route::post('/', [TaskController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [TaskController::class, 'show'])->name('show');
+        Route::put('/', [TaskController::class, 'update'])->name('update');
+        Route::delete('/', [TaskController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\Submission\Http\Controllers\Api\Submission\SubmissionController;
 
 Route::group([

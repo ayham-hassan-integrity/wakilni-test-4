@@ -21,6 +21,15 @@
         <li class="c-sidebar-nav-item">
             <x-utils.link
                 class="c-sidebar-nav-link"
+                :href="route('admin.task.index')"
+                :active="activeClass(Route::is('admin.task.index'), 'c-active')"
+                icon="c-sidebar-nav-icon cil-speedometer"
+                :text="__('Task')" />
+        </li>
+
+        <li class="c-sidebar-nav-item">
+            <x-utils.link
+                class="c-sidebar-nav-link"
                 :href="route('admin.submission.index')"
                 :active="activeClass(Route::is('admin.submission.index'), 'c-active')"
                 icon="c-sidebar-nav-icon cil-speedometer"
