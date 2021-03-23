@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\Permission\Http\Controllers\Api\Permission\PermissionController;
+
+Route::group([
+    'prefix' => 'permission',
+    'as' => 'permission.',
+], function () {
+
+    Route::get('/', [PermissionController::class, 'index'])->name('index');
+    Route::post('/', [PermissionController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [PermissionController::class, 'show'])->name('show');
+        Route::put('/', [PermissionController::class, 'update'])->name('update');
+        Route::delete('/', [PermissionController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\Payment\Http\Controllers\Api\Payment\PaymentController;
 
 Route::group([
