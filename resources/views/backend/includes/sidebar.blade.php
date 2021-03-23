@@ -21,6 +21,15 @@
         <li class="c-sidebar-nav-item">
             <x-utils.link
                 class="c-sidebar-nav-link"
+                :href="route('admin.telescopeentrytag.index')"
+                :active="activeClass(Route::is('admin.telescopeentrytag.index'), 'c-active')"
+                icon="c-sidebar-nav-icon cil-speedometer"
+                :text="__('Telescopeentrytag')" />
+        </li>
+
+        <li class="c-sidebar-nav-item">
+            <x-utils.link
+                class="c-sidebar-nav-link"
                 :href="route('admin.telescopeentry.index')"
                 :active="activeClass(Route::is('admin.telescopeentry.index'), 'c-active')"
                 icon="c-sidebar-nav-icon cil-speedometer"

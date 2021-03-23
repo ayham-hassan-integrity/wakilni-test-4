@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\TelescopeEntryTag\Http\Controllers\Api\Telescopeentrytag\TelescopeentrytagController;
+
+Route::group([
+    'prefix' => 'telescopeentrytag',
+    'as' => 'telescopeentrytag.',
+], function () {
+
+    Route::get('/', [TelescopeentrytagController::class, 'index'])->name('index');
+    Route::post('/', [TelescopeentrytagController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [TelescopeentrytagController::class, 'show'])->name('show');
+        Route::put('/', [TelescopeentrytagController::class, 'update'])->name('update');
+        Route::delete('/', [TelescopeentrytagController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\TelescopeEntry\Http\Controllers\Api\Telescopeentry\TelescopeentryController;
 
 Route::group([
