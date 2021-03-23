@@ -21,6 +21,15 @@
         <li class="c-sidebar-nav-item">
             <x-utils.link
                 class="c-sidebar-nav-link"
+                :href="route('admin.review.index')"
+                :active="activeClass(Route::is('admin.review.index'), 'c-active')"
+                icon="c-sidebar-nav-icon cil-speedometer"
+                :text="__('Review')" />
+        </li>
+
+        <li class="c-sidebar-nav-item">
+            <x-utils.link
+                class="c-sidebar-nav-link"
                 :href="route('admin.recipient.index')"
                 :active="activeClass(Route::is('admin.recipient.index'), 'c-active')"
                 icon="c-sidebar-nav-icon cil-speedometer"

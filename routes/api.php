@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\Review\Http\Controllers\Api\Review\ReviewController;
+
+Route::group([
+    'prefix' => 'review',
+    'as' => 'review.',
+], function () {
+
+    Route::get('/', [ReviewController::class, 'index'])->name('index');
+    Route::post('/', [ReviewController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [ReviewController::class, 'show'])->name('show');
+        Route::put('/', [ReviewController::class, 'update'])->name('update');
+        Route::delete('/', [ReviewController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\Recipient\Http\Controllers\Api\Recipient\RecipientController;
 
 Route::group([
