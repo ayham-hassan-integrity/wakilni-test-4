@@ -21,6 +21,15 @@
         <li class="c-sidebar-nav-item">
             <x-utils.link
                 class="c-sidebar-nav-link"
+                :href="route('admin.file.index')"
+                :active="activeClass(Route::is('admin.file.index'), 'c-active')"
+                icon="c-sidebar-nav-icon cil-speedometer"
+                :text="__('File')" />
+        </li>
+
+        <li class="c-sidebar-nav-item">
+            <x-utils.link
+                class="c-sidebar-nav-link"
                 :href="route('admin.failedjob.index')"
                 :active="activeClass(Route::is('admin.failedjob.index'), 'c-active')"
                 icon="c-sidebar-nav-icon cil-speedometer"

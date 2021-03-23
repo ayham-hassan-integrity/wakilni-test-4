@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\File\Http\Controllers\Api\File\FileController;
+
+Route::group([
+    'prefix' => 'file',
+    'as' => 'file.',
+], function () {
+
+    Route::get('/', [FileController::class, 'index'])->name('index');
+    Route::post('/', [FileController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [FileController::class, 'show'])->name('show');
+        Route::put('/', [FileController::class, 'update'])->name('update');
+        Route::delete('/', [FileController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\FailedJob\Http\Controllers\Api\Failedjob\FailedjobController;
 
 Route::group([
