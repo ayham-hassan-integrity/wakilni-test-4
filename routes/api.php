@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\RoleHaPermission\Http\Controllers\Api\Rolehapermission\RolehapermissionController;
+
+Route::group([
+    'prefix' => 'rolehapermission',
+    'as' => 'rolehapermission.',
+], function () {
+
+    Route::get('/', [RolehapermissionController::class, 'index'])->name('index');
+    Route::post('/', [RolehapermissionController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [RolehapermissionController::class, 'show'])->name('show');
+        Route::put('/', [RolehapermissionController::class, 'update'])->name('update');
+        Route::delete('/', [RolehapermissionController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\Review\Http\Controllers\Api\Review\ReviewController;
 
 Route::group([

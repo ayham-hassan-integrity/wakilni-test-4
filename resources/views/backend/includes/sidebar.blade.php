@@ -21,6 +21,15 @@
         <li class="c-sidebar-nav-item">
             <x-utils.link
                 class="c-sidebar-nav-link"
+                :href="route('admin.rolehapermission.index')"
+                :active="activeClass(Route::is('admin.rolehapermission.index'), 'c-active')"
+                icon="c-sidebar-nav-icon cil-speedometer"
+                :text="__('Rolehapermission')" />
+        </li>
+
+        <li class="c-sidebar-nav-item">
+            <x-utils.link
+                class="c-sidebar-nav-link"
                 :href="route('admin.review.index')"
                 :active="activeClass(Route::is('admin.review.index'), 'c-active')"
                 icon="c-sidebar-nav-icon cil-speedometer"
