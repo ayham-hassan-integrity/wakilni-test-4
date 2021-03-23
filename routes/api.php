@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\Contact\Http\Controllers\Api\Contact\ContactController;
+
+Route::group([
+    'prefix' => 'contact',
+    'as' => 'contact.',
+], function () {
+
+    Route::get('/', [ContactController::class, 'index'])->name('index');
+    Route::post('/', [ContactController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [ContactController::class, 'show'])->name('show');
+        Route::put('/', [ContactController::class, 'update'])->name('update');
+        Route::delete('/', [ContactController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\Comment\Http\Controllers\Api\Comment\CommentController;
 
 Route::group([
