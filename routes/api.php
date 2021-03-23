@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\ObjectType\Http\Controllers\Api\Objecttype\ObjecttypeController;
+
+Route::group([
+    'prefix' => 'objecttype',
+    'as' => 'objecttype.',
+], function () {
+
+    Route::get('/', [ObjecttypeController::class, 'index'])->name('index');
+    Route::post('/', [ObjecttypeController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [ObjecttypeController::class, 'show'])->name('show');
+        Route::put('/', [ObjecttypeController::class, 'update'])->name('update');
+        Route::delete('/', [ObjecttypeController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\Notification\Http\Controllers\Api\Notification\NotificationController;
 
 Route::group([
