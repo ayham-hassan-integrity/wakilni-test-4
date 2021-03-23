@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\FlatOrder\Http\Controllers\Api\Flatorder\FlatorderController;
+
+Route::group([
+    'prefix' => 'flatorder',
+    'as' => 'flatorder.',
+], function () {
+
+    Route::get('/', [FlatorderController::class, 'index'])->name('index');
+    Route::post('/', [FlatorderController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [FlatorderController::class, 'show'])->name('show');
+        Route::put('/', [FlatorderController::class, 'update'])->name('update');
+        Route::delete('/', [FlatorderController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\File\Http\Controllers\Api\File\FileController;
 
 Route::group([

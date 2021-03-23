@@ -21,6 +21,15 @@
         <li class="c-sidebar-nav-item">
             <x-utils.link
                 class="c-sidebar-nav-link"
+                :href="route('admin.flatorder.index')"
+                :active="activeClass(Route::is('admin.flatorder.index'), 'c-active')"
+                icon="c-sidebar-nav-icon cil-speedometer"
+                :text="__('Flatorder')" />
+        </li>
+
+        <li class="c-sidebar-nav-item">
+            <x-utils.link
+                class="c-sidebar-nav-link"
                 :href="route('admin.file.index')"
                 :active="activeClass(Route::is('admin.file.index'), 'c-active')"
                 icon="c-sidebar-nav-icon cil-speedometer"
