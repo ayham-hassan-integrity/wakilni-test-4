@@ -21,6 +21,15 @@
         <li class="c-sidebar-nav-item">
             <x-utils.link
                 class="c-sidebar-nav-link"
+                :href="route('admin.payment.index')"
+                :active="activeClass(Route::is('admin.payment.index'), 'c-active')"
+                icon="c-sidebar-nav-icon cil-speedometer"
+                :text="__('Payment')" />
+        </li>
+
+        <li class="c-sidebar-nav-item">
+            <x-utils.link
+                class="c-sidebar-nav-link"
                 :href="route('admin.passwordreset.index')"
                 :active="activeClass(Route::is('admin.passwordreset.index'), 'c-active')"
                 icon="c-sidebar-nav-icon cil-speedometer"

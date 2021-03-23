@@ -17,6 +17,22 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+use App\Domains\Payment\Http\Controllers\Api\Payment\PaymentController;
+
+Route::group([
+    'prefix' => 'payment',
+    'as' => 'payment.',
+], function () {
+
+    Route::get('/', [PaymentController::class, 'index'])->name('index');
+    Route::post('/', [PaymentController::class, 'store'])->name('store');
+    Route::group(['prefix' => '{project}'], function () {
+        Route::get('/', [PaymentController::class, 'show'])->name('show');
+        Route::put('/', [PaymentController::class, 'update'])->name('update');
+        Route::delete('/', [PaymentController::class, 'delete'])->name('destroy');
+    });
+});
+
 use App\Domains\PasswordReset\Http\Controllers\Api\Passwordreset\PasswordresetController;
 
 Route::group([
